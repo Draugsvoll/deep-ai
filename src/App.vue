@@ -78,7 +78,11 @@ export default {
 
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-          console.log(this.responseText);
+          // console.log(this.responseText);
+          var response = this.responseText
+          var response1 = response.split(":")
+          var response2 = response1[1].split(",")
+          console.log(response2[0])
         }
       });
       xhr.open("POST", "https://deepai-deepai-computer-vision-v1.p.rapidapi.com/api/neuraltalk");
