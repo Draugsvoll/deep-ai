@@ -17,6 +17,9 @@
       <img class="selected-img" v-bind:src="selectedImage" alt="" srcset="">
       <div>Get caption</div>
       <button @click="getCaption">Caption</button>
+      <button >Emotions</button>
+      <button >Objects</button>
+      <button >More</button>
     </div>
   </div>
 </template>
