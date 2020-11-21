@@ -1,28 +1,92 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- SEARCH FIELD -->
+    <div>
+      <input v-model="searchTerm" type="text">
+      <button @click="search(searchTerm)">Search</button>
+    </div>
+    <!-- IMAGES -->
+    <div class="image" v-for="image in images" :key=image.id>
+      <div @click="selectImage(image)" class="img-container">
+        <img v-bind:src="image" >
+      </div>
+    </div>
+    <!-- SELECTED IMAGE -->
+    <div class="selected-img-container">
+      <div>here</div>
+      <img class="selected-img" v-bind:src="selectedImage" alt="" srcset="">
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import axios from "axios";
 
 export default {
   name: 'App',
+  data () {
+    return {
+      searchTerm: '',
+      selectedImage: '',
+      images: []
+    }
+  },
   components: {
-    HelloWorld
-  }
+
+  },
+  methods: {
+    search (searchTerm) {
+      var images = []
+      console.log('Search term: ', searchTerm)
+      const options = {
+      method: 'GET',
+      url: 'https://bing-image-search1.p.rapidapi.com/images/search',
+      params: {q: this.searchTerm},
+      headers: {
+        'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+        'x-rapidapi-host': 'bing-image-search1.p.rapidapi.com'
+      }
+    };
+    axios.request(options).then(function (response) {
+      response = response.data.value
+      Object.entries(response).forEach( image => {
+        const newImage = image[1].contentUrl
+        images.push(newImage)
+      })
+    }).catch(function (error) {
+      console.error(error);
+    });
+    this.images = images
+    },// search
+    //* select image
+    selectImage(image) {
+      this.selectedImage = image
+      console.log('image select: ', image)
+      
+    }
+  }//methods
+
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+input[type=text] {
+  width:400px;
 }
+img {
+  max-width:300px;
+}
+.img-container {
+  display: inline-block;
+  border:2px solid rgba(0,0,0,0);
+}
+.img-container:hover {
+  border:2px solid black;
+}
+.image {
+  display: inline;
+  padding:10px 5px;
+  cursor: pointer;
+}
+
 </style>
