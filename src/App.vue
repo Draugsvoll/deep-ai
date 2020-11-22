@@ -15,6 +15,7 @@
     <div class="selected-img-container">
       <div>here</div>
       <img class="selected-img" v-bind:src="selectedImage" alt="" srcset="">
+      <button @click="getCaption()">Get Caption</button>
     </div>
   </div>
 </template>
@@ -57,12 +58,32 @@ export default {
       console.error(error);
     });
     this.images = images
-    },// search
+    },
     //* select image
     selectImage(image) {
       this.selectedImage = image
       console.log('image select: ', image)
-      
+    },
+    getCaption () {
+      console.log('selected image: ', this.selectedImage)
+          fetch("https://deepai-deepai-computer-vision-v1.p.rapidapi.com/api/neuraltalk", {
+      "method": "POST",
+      "headers": {
+        "content-type": "application/x-www-form-urlencoded",
+        "api-key": "a570693f-0601-4674-9737-0c617e3668d6",
+        "x-rapidapi-key": "624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8",
+        "x-rapidapi-host": "deepai-deepai-computer-vision-v1.p.rapidapi.com"
+      },
+      "body": {
+        "image": "https://s3.amazonaws.com/fallingrain/uploads/3e0833c658774a9aa082e5d781b8770e/large/MF%206245.jpg?1364847848"
+      }
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(err => {
+      console.error(err);
+    });
     }
   }//methods
 
