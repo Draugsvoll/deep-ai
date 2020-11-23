@@ -77,6 +77,7 @@ export default {
 .container {
     display: inline-flex;
     justify-content: center;
+    margin-bottom:500px;
 }
 .face {
     margin:10px 0 0 0px;

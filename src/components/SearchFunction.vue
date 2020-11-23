@@ -11,7 +11,7 @@
       <div class="images-container" >
         <!-- loop images-->
         <div class="image" v-for="image in images" :key=image.id>
-          <div @click="$emit('selectimage', image)" class="img-container" >
+          <div v-scroll-to="'#selected-img-container'" @click="$emit('selectimage', image)" class="img-container">
             <img class="img" v-bind:src="image" >
           </div>
         </div>

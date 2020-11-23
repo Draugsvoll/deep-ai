@@ -2,9 +2,9 @@
     <div class="container">
     
         <!-- SELECTED IMAGE -->
-        <div class="selected-img-container">
-            <div>Selected Image:</div>
-            <img class="selected-img" v-bind:src="selectedImage" alt="" srcset="">
+        <div class="selected-img-container" id="selected-img-container">
+            <h3>Selected Image:</h3>
+            <img class="selected-img" v-bind:src="selectedImage" alt="" srcset="" >
             <div></div>
             What data do you want from the Ai?
             <br>
