@@ -22,7 +22,6 @@
 <script>
 // import { getCaptionApi } from '../apiConfig' 
 // import axios from 'axios'
-
 export default {
     data () {
         return {
@@ -96,13 +95,16 @@ export default {
         },
         //* get emotions
         getEmotions (image) {
+            var ref = this
+            // var emotions = []
             const deepai = require('deepai'); // OR include deepai.min.js as a script tag in your HTML
             deepai.setApiKey('a570693f-0601-4674-9737-0c617e3668d6');
             (async function() {
                 var resp = await deepai.callStandardApi("facial-expression-recognition", {
                         image: image,
                 });
-                console.log(resp);
+                var emotions = resp
+                ref.$store.dispatch('setemotions', emotions)
             })()
         }
     },//method
@@ -128,5 +130,4 @@ export default {
   max-width:400px;
   max-height:400px;
 }
-
 </style>

@@ -8,7 +8,7 @@
       </div>
 
       <!-- IMAGES -->
-      <div class="images-container">
+      <div class="images-container" >
         <!-- loop images-->
         <div class="image" v-for="image in images" :key=image.id>
           <div @click="$emit('selectimage', image)" class="img-container" >
@@ -35,6 +35,7 @@ export default {
     methods:  {
         // search images
         search (searchTerm) {
+        
         var images = []
         console.log('Search term: ', searchTerm)
         const options = {
@@ -79,9 +80,11 @@ export default {
 }
 .images-container {
   height:500px;
-  max-width: 1000px;
+  width: 95%;
+  max-width:1100px;
   margin:auto;
   overflow-y:scroll;
+  overflow:auto;
   border:2px solid black;
 }
 input[type=text] {

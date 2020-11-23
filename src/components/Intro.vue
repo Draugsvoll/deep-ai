@@ -21,7 +21,7 @@ export default {
 <style scoped>
 .container {
     border:1px solid black;
-    background:grey;
+    background:lightgrey;
     text-align: center;
 }
 </style>

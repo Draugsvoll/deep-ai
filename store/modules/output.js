@@ -2,7 +2,8 @@
 const state = {
     caption: '',
     faces: [],
-    objects: []
+    objects: [],
+    emotions: []
 }
 
 
@@ -26,7 +27,14 @@ const mutations = {
             const newObject = { caption: object.caption }
             state.objects.push(newObject.caption)
         });
-    }
+    },
+    'SET_EMOTIONS' (state, emotions) {
+        var list = emotions.output.expressions
+        var emotionList = list.map(emotion => {
+            const newEmotion = { emotion: emotion.emotion, accuracy: emotion.confidence }
+            state.emotions.push(newEmotion)
+        })
+    },
 }
 
 const actions = {   // aviable actions on this site
@@ -38,6 +46,9 @@ const actions = {   // aviable actions on this site
     },
     setobjects: ({ commit }, objects) => {
         commit('SET_OBJECTS', objects)
+    },
+    setemotions: ({ commit }, emotions) => {
+        commit('SET_EMOTIONS', emotions)
     }
 }
 
@@ -50,6 +61,9 @@ const getters = {
     },
     objects(state) {
         return state.objects
+    },
+    emotions(state) {
+        return state.emotions
     }
 }
 

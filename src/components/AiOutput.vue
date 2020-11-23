@@ -27,11 +27,12 @@
                 </div>
             </div>
 
-            <div class="Emotion">
-                <h3>Objects</h3>
-                <div v-for="(object, index) in objects" :key="object.id">
-                    <div v-if="index<5">
-                       {{ index+1 }}.    {{ object }}    
+            <div class="emotions">
+                <h3>Emotions</h3>
+                <div v-for="(emotion, index) in emotions" :key="emotion.id">
+                    <div  v-if="index<5">
+                       <b>face {{ index+1 }}:</b> <br>
+                           {{ (emotion.accuracy*100).toFixed(0) }}%     {{ emotion.emotion }}  
                     </div>
                 </div>
             </div>
@@ -52,6 +53,9 @@ export default {
         },
         objects () {
             return this.$store.getters.objects
+        },
+        emotions () {
+            return this.$store.getters.emotions
         }
     }
 }
@@ -59,6 +63,9 @@ export default {
 
 
 <style scoped>
+* {
+    border:1px solid black;
+}
 .outer-container {
     max-width:1000px;
     display: flex;
@@ -75,11 +82,13 @@ export default {
 .face {
     margin:10px 0 0 0px;
 }
-.caption, .faces, .objects {
-    max-width:300px;
+.caption, .faces, .objects, .emotions {
+    width:220px;
     margin:left;
     text-align: start;
-    margin-right: 175px;
+}
+.emotion b {
+    text-align: start !important;
 }
 
 </style>
