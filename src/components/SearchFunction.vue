@@ -1,21 +1,21 @@
 <template>
     <div class="container">
     
-    <!-- SEARCH FIELD -->
-    <div>
-      <input v-model="searchTerm" type="text">
-      <button @click="search(searchTerm)">Search</button>
-    </div>
+      <!-- SEARCH FIELD -->
+      <div class="searchField">
+        <input v-model="searchTerm" type="text" placeholder="Search for anything">
+        <button @click="search(searchTerm)">Search</button>
+      </div>
 
-    <!-- IMAGES -->
-    <div class="images-container">
-      <!-- v-for -->
-      <div class="image" v-for="image in images" :key=image.id>
-        <div @click="$emit('selectimage', image)" class="img-container" >
-          <img class="img" v-bind:src="image" >
+      <!-- IMAGES -->
+      <div class="images-container">
+        <!-- loop images-->
+        <div class="image" v-for="image in images" :key=image.id>
+          <div @click="$emit('selectimage', image)" class="img-container" >
+            <img class="img" v-bind:src="image" >
+          </div>
         </div>
       </div>
-    </div>
 
     </div>
 </template>
@@ -61,13 +61,38 @@ export default {
 </script>
 
 <style scoped>
+* {
 
+}
+.container {
+  margin-top:50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height:auto;
+  width:100%;
+  justify-content: center;
+}
+.searchField {
+  max-width:700px;
+  margin:auto;
+}
 .images-container {
   height:500px;
+  max-width: 1000px;
+  margin:auto;
   overflow-y:scroll;
+  border:2px solid black;
 }
 input[type=text] {
   width:400px;
+  height:33px;
+  margin-bottom: 50px;
+}
+button {
+  margin:5px;
+  height:33px;
+  background: lightblue;
 }
 .img {
   max-width:250px;
@@ -86,7 +111,7 @@ input[type=text] {
   padding:10px 5px;
   cursor: pointer;
   height:500px;
-  overflow:scroll
+  overflow:scroll;
 }
 
 </style>

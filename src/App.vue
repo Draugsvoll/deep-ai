@@ -1,6 +1,7 @@
 <template>
   <div id="app">
 
+    <app-intro></app-intro>
     <app-searchfunction @selectimage="selectImage"></app-searchfunction>
     <app-selectedimage :selectedImage="selectedImage"></app-selectedimage>
     <app-aioutput></app-aioutput>
@@ -12,6 +13,7 @@
 import SearchFunction from "./components/SearchFunction"
 import SelectedImage from "./components/SelectedImage"
 import AiOutput from "./components/AiOutput"
+import Intro from "./components/Intro"
 
 export default {
   name: 'App',
@@ -20,14 +22,13 @@ export default {
       searchTerm: '',
       selectedImage: '',
       images: [],
-      // Ai outputs
-      caption: ''
     }
   },
   components: {
     appSearchfunction: SearchFunction,
     appSelectedimage: SelectedImage,
     appAioutput: AiOutput,
+    appIntro: Intro,
   },
   methods: {
     selectImage (value) {
