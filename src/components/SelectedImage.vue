@@ -11,7 +11,7 @@
             <button @click="getCaption(selectedImage)">Description</button>
             <button @click="getDemographics(selectedImage)" >Face Analysis</button>
             <button @click="getObjects(selectedImage)">Find Objects</button>
-            <button >More</button>
+            <button @click="getEmotions(selectedImage)">Emotions</button>
         </div>
 
     </div>
@@ -93,20 +93,19 @@ export default {
             xhr.setRequestHeader("x-rapidapi-key", "624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8");
             xhr.setRequestHeader("x-rapidapi-host", "deepai-deepai-computer-vision-v1.p.rapidapi.com");
             xhr.send(data);
+        },
+        //* get emotions
+        getEmotions (image) {
+            const deepai = require('deepai'); // OR include deepai.min.js as a script tag in your HTML
+            deepai.setApiKey('a570693f-0601-4674-9737-0c617e3668d6');
+            (async function() {
+                var resp = await deepai.callStandardApi("facial-expression-recognition", {
+                        image: image,
+                });
+                console.log(resp);
+            })()
         }
     },//method
-    created () {
-        const deepai = require('deepai'); // OR include deepai.min.js as a script tag in your HTML
-
-        deepai.setApiKey('a570693f-0601-4674-9737-0c617e3668d6');
-
-        (async function() {
-            var resp = await deepai.callStandardApi("facial-expression-recognition", {
-                    image: "https://image.shutterstock.com/image-photo/portrait-angry-bearded-man-screaming-260nw-659505361.jpg",
-            });
-            console.log(resp);
-        })()
-    }
 }
 </script>
 

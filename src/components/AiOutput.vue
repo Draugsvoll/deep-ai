@@ -27,6 +27,15 @@
                 </div>
             </div>
 
+            <div class="Emotion">
+                <h3>Objects</h3>
+                <div v-for="(object, index) in objects" :key="object.id">
+                    <div v-if="index<5">
+                       {{ index+1 }}.    {{ object }}    
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>¨
@@ -51,7 +60,7 @@ export default {
 
 <style scoped>
 .outer-container {
-    width:950px;
+    max-width:1000px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -64,12 +73,13 @@ export default {
     justify-content: center;
 }
 .face {
-    margin:10PX 0 0 0px;
+    margin:10px 0 0 0px;
 }
 .caption, .faces, .objects {
-    min-width:300px;
+    max-width:300px;
     margin:left;
     text-align: start;
+    margin-right: 175px;
 }
 
 </style>
