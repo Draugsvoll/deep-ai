@@ -64,7 +64,6 @@ export default {
 
 <style scoped>
 * {
-    border:1px solid black;
 }
 .outer-container {
     max-width:1000px;
