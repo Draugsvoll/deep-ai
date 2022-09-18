@@ -6,7 +6,7 @@
             <div class="img-row">
                 <button class="far fa-chevron-left fa-3x left-btn" @click="prevImage(currentImage)"></button>
                 <div class="static-img-box">
-                    <img @error="$event.target.src='https://tripisia.id/assets/images/NoImage.png'" 
+                    <img ref="activeImage" @error="$event.target.src='https://tripisia.id/assets/images/NoImage.png'" 
                         class="selected-img" v-bind:src="currentImage.image" srcset=""  > 
                 </div>
                 <button class="far fa-chevron-right fa-3x right-btn" @click="nextImage(currentImage)"></button>
@@ -57,8 +57,6 @@ export default {
 
         //* GET CAPTION
         getCaption (image) {
-
-            //* CAPTION
             var ref = this
             this.$store.dispatch('setprocessing')
             const options = {
@@ -210,21 +208,25 @@ export default {
             // index++ --> runs in nextImage, 
         },
         nextImage (currentImage) {
-            this.$store.dispatch('cleardata')
+            const ref = this
+            this.$refs.activeImage.classList.add('transition')
+            ref.$store.dispatch('cleardata')
             var index = currentImage.index
-            const images = this.$store.getters.images
+            const images = ref.$store.getters.images
             if (index < 34) {
                 index++
             } else {
                 index = 0
             }
             const newCurrentImage = { image: images[index], index: index}
-            // console.log(newCurrentImage, "newCurrentImage")
-            
-            // console.log('new current: ',newCurrentImage)
-            this.$store.dispatch('setcurrentimg', newCurrentImage)
+            setTimeout(function(){
+                ref.$store.dispatch('setcurrentimg', newCurrentImage)
+                ref.$refs.activeImage.classList.remove('transition')
+            }, 300);
         },
         prevImage (currentImage) {
+            const ref = this
+            this.$refs.activeImage.classList.add('transition')
             this.$store.dispatch('cleardata')
             var index = currentImage.index
             const images = this.$store.getters.images
@@ -234,8 +236,10 @@ export default {
                 index--
             }
             const newCurrentImage = { image: images[index], index: index}
-            // console.log('new current: ',newCurrentImage)
-            this.$store.dispatch('setcurrentimg', newCurrentImage)
+            setTimeout(function(){
+                ref.$store.dispatch('setcurrentimg', newCurrentImage)
+                ref.$refs.activeImage.classList.remove('transition')
+            }, 300);
         },
         clearData () {
             this.$store.dispatch('cleardata')
@@ -255,8 +259,8 @@ export default {
 
 
 <style scoped>
-* {
-    /* border:1px solid purple; */
+.transition {
+    opacity: 0 !important;
 }
 .container {
     margin-top:70px;
@@ -278,6 +282,7 @@ export default {
   max-height:310px;
   border-radius:2px;
   opacity: 0.9;
+  transition: all 0.3s;
 }
 .static-img-box {
     width:500px;
@@ -298,7 +303,6 @@ export default {
     cursor:pointer;
     color:rgb(243, 252, 245);
     width:125px;
-   ;
 }
 .left-btn:hover, .right-btn:hover {
     color:rgb(121, 152, 160);

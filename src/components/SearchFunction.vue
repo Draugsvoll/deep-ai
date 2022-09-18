@@ -146,7 +146,7 @@ h3{
 input[type=text] {
   width:240px;
   font-size: 14px;
-  padding:0.6rem;
+  padding:0.5rem;
   background:rgba(0, 0, 0, 0.4);
   border:1px solid var(--border-light);
   border-radius:5px;
@@ -167,6 +167,7 @@ button {
   outline:none;
   cursor:pointer;
   border:1px solid var(--border-light);
+  transition: 0.2s;
 }
 button:hover {
     background: rgba(9, 65, 83, 0.99);
@@ -220,14 +221,14 @@ h1 {
   margin-top:-15px;
 }
 .webcam {
-    background: rgb(0 49 66);
+    background: rgb(0, 53, 71);
     overflow: hidden;
     cursor: pointer;
     margin: auto;
     margin-top: 90px;
     padding:0.55rem 0.35rem;
     padding-right:0rem;
-    width: 275px;
+    width: 265px;
     font-size: 14px;
     display: flex;
     justify-content: center;
