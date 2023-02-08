@@ -22,6 +22,7 @@
       <!-- IMAGES -->
       <div class="images-container" >
         <!-- <h3>Select Image</h3> -->
+        <p class="error" v-if="!canFetchImages">{{errorMsg}}</p>
         <div class="image" v-for="(image, index) in images" :key=index>
           <!-- single image -->
           <div v-scroll-to="'#scroll-to-element'" @click="selectImage(image, index)"  class="img-container" v-show="images != ''">
@@ -47,6 +48,8 @@ export default {
       images: [],
       showWebcam: false,
       videoSrc: '',
+      canFetchImages: true,
+      errorMsg: undefined
       }
     },
     methods:  {
@@ -81,6 +84,8 @@ export default {
             ref.$store.dispatch('setimages', images)
             }).catch(function (error) {
                 console.error(error);
+                ref.canFetchImages = false
+                ref.errorMsg = error
             });
             this.images = images
           },
@@ -266,6 +271,15 @@ iframe {
 ::-webkit-scrollbar-thumb:hover {
     background:rgb(19, 95, 109);
 }
+
+
+.error {
+  color:red;
+  margin:auto;
+  width:fit-content;
+  margin:auto;
+}
+
 
 @media only screen and (max-width: 562px) {
   input[type=text] {
