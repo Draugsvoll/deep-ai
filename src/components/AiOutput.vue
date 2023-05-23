@@ -147,12 +147,14 @@ export default {
     max-height:300px;
     background: rgba(0, 5, 8, 0.5);
     padding-left:10px;
+    padding-right:10px;
     overflow-y:auto;
     display: inline-block
 }
 .caption-logo, .face-logo, .object-logo, .emotion-logo {
-    margin-left:35px;
-    font-size:17px;
+    width: 100%;
+    text-align: center;
+    font-size:16px;
 }
 .emotion b {
     text-align: start !important;

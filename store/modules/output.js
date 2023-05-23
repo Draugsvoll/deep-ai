@@ -13,7 +13,6 @@ const state = {
 
 const mutations = {
     'SET_CAPTION' (state, caption) {
-        caption = caption.description.captions[0].text
         state.caption = caption
         state.processing = false
     },

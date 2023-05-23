@@ -51,10 +51,12 @@ ul {
 }
 .text {
     font-size:14px;
-    max-width:550px;
+    max-width:593px;
+    letter-spacing: 0.04rem;
     text-align: justify;
     margin:60px auto;
     text-shadow: 0px 3px 4px #011b23;
+    line-height: 1.2;
 
 }
 .sub-headline {

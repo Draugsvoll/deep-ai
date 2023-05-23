@@ -3,8 +3,8 @@
 
       <!-- SEARCH FIELD -->
       <div class="searchField" id="results">
-        <input v-model="searchTerm" type="text" placeholder="Search for anything..." autofocus>
-        <button v-scroll-to="'#results'" @click="search(searchTerm)" @keyup.enter="search(searchTerm)" >Search</button>
+        <input v-model="searchTerm" type="text" placeholder="Search for anything..." autofocus @keyup.enter="search(searchTerm)">
+        <button v-scroll-to="'#results'" @click="search(searchTerm)" >Search</button>
       </div>
      <!-- <h1>Or</h1> -->
 
@@ -64,31 +64,35 @@ export default {
         },
 
         //* search images
-        search (searchTerm) {
-            var images = []
-            const ref = this
-            const options = {
+        async search (searchTerm) {
+          const ref = this
+          const options = {
             method: 'GET',
             url: 'https://bing-image-search1.p.rapidapi.com/images/search',
-            params: {q: this.searchTerm},
+            params: {
+              q: searchTerm,
+              count: '30'
+            },
             headers: {
-                'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-                'x-rapidapi-host': 'bing-image-search1.p.rapidapi.com'
-            }};
-            axios.request(options).then(function (response) {
-                response = response.data.value
-                Object.entries(response).forEach( image => {
-                  const newImage = image[1].contentUrl
-                  images.push(newImage)
-                })
+              'content-type': 'application/octet-stream',
+              'X-RapidAPI-Key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+              'X-RapidAPI-Host': 'bing-image-search1.p.rapidapi.com'
+            }
+          };
+
+          try {
+            var images = []
+            const response = await axios.request(options);
+            console.log(response.data);
+            response.data.value.forEach((image)=>{
+              images.push(image.thumbnailUrl)
+            })
             ref.$store.dispatch('setimages', images)
-            }).catch(function (error) {
-                console.error(error);
-                ref.canFetchImages = false
-                ref.errorMsg = error
-            });
-            this.images = images
-          },
+          } catch (error) {
+            console.error(error);
+          }
+          this.images = images
+      },
 
       //* selected image
       selectImage(image, index) {
@@ -101,11 +105,6 @@ export default {
         this.search(this.searchTerm)
         this.searchTerm=''
         const ref = this
-         window.addEventListener('keyup', function(event) {
-          if (event.keyCode === 13) {
-            ref.search('people')
-          }
-        });
     },
 }
 </script>
@@ -149,9 +148,9 @@ h3{
 }
 
 input[type=text] {
-  width:240px;
+  width:255px;
   font-size: 14px;
-  padding:0.5rem;
+  padding:0.63rem 0.5rem;
   background:rgba(0, 0, 0, 0.4);
   border:1px solid var(--border-light);
   border-radius:5px;

@@ -38,102 +38,52 @@ export default {
         }
     },
     methods: {
-        //* remove background
-        // removeBackground (image) {
-        //     const ref = this
-        //     const data = null;
-        //     const xhr = new XMLHttpRequest();
-        //     xhr.withCredentials = true;
-        //     xhr.addEventListener("readystatechange", function () {
-        //         if (this.readyState === this.DONE) {
-        //             console.log(this.responseText);
-        //         }
-        //     });
-        //     xhr.open("GET", "https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/06/06/15/Chris-Pratt.jpg");
-        //     xhr.setRequestHeader("x-rapidapi-key", "624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8");
-        //     xhr.setRequestHeader("x-rapidapi-host", "no-more-background.p.rapidapi.com");
-        //     xhr.send(data);
-        // },
-
-        //* GET CAPTION
-        getCaption (image) {
-            var ref = this
+        getObjects(image) {
             this.$store.dispatch('setprocessing')
+            const ref = this
             const options = {
-            method: 'POST',
-            url: 'https://microsoft-computer-vision3.p.rapidapi.com/describe',
-            params: {language: 'en', maxCandidates: '1', descriptionExclude: 'Celebrities'},
-            headers: {
-                'content-type': 'application/json',
-                'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-                'x-rapidapi-host': 'microsoft-computer-vision3.p.rapidapi.com'
-            },
-            data: {
-                url: image
-            }
+                method: 'POST',
+                url: 'https://microsoft-computer-vision3.p.rapidapi.com/describe',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-RapidAPI-Key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+                    'X-RapidAPI-Host': 'microsoft-computer-vision3.p.rapidapi.com'
+                },
+                data: `{"url":"${image}"}`
+                // data: `{"url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRghDts9hdxmwLJstToqF24fGrJW7RQ3uVeeQ&usqp=CAU}"}`
             };
+
             axios.request(options).then(function (response) {
-                // console.log(response.data);
-                ref.$store.dispatch('setcaption', response.data)
+                let resp = response.data.description.tags
+                let objects = []
+                resp.forEach((object, index) => {
+                    objects.push(object)
+                    if (index >= 5) return
+                })
+                ref.$store.dispatch('setobjects', objects)
             }).catch(function (error) {
-                console.error(error);
+                console.error('1234 error', error )
             });
         },
 
-        //* get faces
-        // getDemographics () {
-        //     this.$store.dispatch('setprocessing')
-        //     var ref = this
-        //     const data = `image=${this.currentImage.image}`;
-        //     const xhr = new XMLHttpRequest();
-        //     xhr.withCredentials = true;
-        //     xhr.addEventListener("readystatechange", function () {
-        //         if (this.readyState === this.DONE) {
-        //         // console.log(this.responseText);
-        //         var faces = JSON.parse(this.responseText);
-        //         console.log(faces.output.faces);
-        //         ref.$store.dispatch('setfaces', faces)
-        //         }
-        //     });
-        //     xhr.open("POST", "https://deepai-deepai-computer-vision-v1.p.rapidapi.com/api/demographic-recognition");
-        //     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-        //     xhr.setRequestHeader("api-key", "a570693f-0601-4674-9737-0c617e3668d6");
-        //     xhr.setRequestHeader("x-rapidapi-key", "624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8");
-        //     xhr.setRequestHeader("x-rapidapi-host", "deepai-deepai-computer-vision-v1.p.rapidapi.com");
-        //     xhr.send(data);
-        //     },
-
-        //* get objects
-        getObjects (image) {
+        getCaption(image) {
+            const ref = this
             this.$store.dispatch('setprocessing')
-            var ref = this
             const options = {
-            method: 'POST',
-            url: 'https://microsoft-computer-vision3.p.rapidapi.com/describe',
-            params: {language: 'en', maxCandidates: '1', descriptionExclude: 'Celebrities'},
-            headers: {
-                'content-type': 'application/json',
-                'x-rapidapi-key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
-                'x-rapidapi-host': 'microsoft-computer-vision3.p.rapidapi.com'
-            },
-            data: {
-                url: image
-            }
+                method: 'POST',
+                url: 'https://microsoft-computer-vision3.p.rapidapi.com/describe',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-RapidAPI-Key': '624dc7754bmsh3f19b0e1fbd4882p18e7f1jsn0d9d641d8df8',
+                    'X-RapidAPI-Host': 'microsoft-computer-vision3.p.rapidapi.com'
+                },
+                data: `{"url":"${image}"}`
             };
 
             axios.request(options).then(function (response) {
-                // console.log(response.data.description.tags)
-                var counter = 0
-                var objects = response.data.description.tags
-                var objectList = []
-                objects.forEach(object => {
-                    counter++
-                    if (counter < 6) {
-                        objectList.push(object)
-                    }
-                })
-                // console.log(objectList)
-                ref.$store.dispatch('setobjects', objectList)
+                let resp = response.data.description.captions[0]
+                let newObject = resp.text + ' ' + '('+(resp.confidence*100).toFixed(0)+'% confident)'
+                ref.$store.dispatch('setcaption', newObject)
             }).catch(function (error) {
                 console.error(error);
             });
@@ -151,7 +101,6 @@ export default {
                         image: image,
                 });
                 var emotions = resp
-                // console.log(resp)
                 ref.$store.dispatch('setemotions', emotions)
             })()
         },
