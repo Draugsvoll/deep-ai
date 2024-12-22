@@ -36,7 +36,7 @@ footer{
   color:rgb(213, 229, 233);
   padding:40px;
   margin-top:150px;
-  border-top: rgb(3, 43, 61) 1px solid;
+  border:none;
   font-size: 13px;
   backdrop-filter: blur(2px);
 }

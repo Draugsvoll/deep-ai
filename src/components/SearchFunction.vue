@@ -6,7 +6,6 @@
         <input v-model="searchTerm" type="text" placeholder="Search for anything..." autofocus @keyup.enter="search(searchTerm)">
         <button v-scroll-to="'#results'" @click="search(searchTerm)" >Search</button>
       </div>
-     <!-- <h1>Or</h1> -->
 
       <!-- WEBCAM -->
       <div class="webcam" @click="toggleWebcam">
@@ -21,7 +20,6 @@
 
       <!-- IMAGES -->
       <div class="images-container" >
-        <!-- <h3>Select Image</h3> -->
         <p class="error" v-if="!canFetchImages">{{errorMsg}}</p>
         <div class="image" v-for="(image, index) in images" :key=index>
           <!-- single image -->
@@ -90,6 +88,8 @@ export default {
             ref.$store.dispatch('setimages', images)
           } catch (error) {
             console.error(error);
+            this.errorMsg = error
+            this.canFetchImages = false
           }
           this.images = images
       },
@@ -141,7 +141,7 @@ h3{
   margin:auto;
   margin-top:50px;
   overflow:auto;
-  border: rgb(3, 43, 61) 1px solid;
+  border:none;
   border-radius:4px;
   padding:15px;
   background: rgba(0, 5, 8, 0.6);
@@ -161,8 +161,8 @@ input[type=text] {
   color:rgb(202, 226, 220);
 }
 button {
-  margin:0 5px;
-  width:80px;
+  margin:0 8px;
+  width:90px;
   padding:0.56rem;
   font-size: 14px;
   border-radius:5px;

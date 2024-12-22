@@ -9,7 +9,7 @@
         </p>   
         <div class="elon-box">
             <div>
-                <p class="quote">" Never spend 5 minutes doing a task manually, when you can spend 5 hours failing to automate it "</p>
+                <p class="quote">" Never spend 5 minutes doing a task manually, when you can spend 5 hours automating it "</p>
             </div>
             <div><img src="../../public/elon.jpg" alt=""></div>
         </div>
@@ -39,8 +39,7 @@ h1 {
     color:white;
     padding:15px;
     background: rgba(0, 5, 8, 0.55);
-    border-left: rgb(3, 43, 61) 1px solid;
-    border-right: rgb(3, 43, 61) 1px solid;
+    border:none;
     border-radius:4px;
   backdrop-filter: blur(2px);
 }

@@ -12,14 +12,13 @@
                 <button class="far fa-chevron-right fa-3x right-btn" @click="nextImage(currentImage)"></button>
             </div>
             <div></div>
-            <p>What do you want from the Ai? </p> 
             <button class="analyze-btn" @click="getCaption(currentImage.image)">Description</button>
             <!-- <button class="analyze-btn" @click="getDemographics(currentImage.image)" >Face Analysis</button> -->
             <button class="analyze-btn" @click="getObjects(currentImage.image)">Find Objects</button>
             <button class="analyze-btn" @click="getEmotions(currentImage.image)">Emotions</button>
             <button class="analyze-btn" @click="getCelebrity(currentImage.image)">Guess celebrity</button>
             <!-- <button class="analyze-btn" @click="removeBackground(currentImage.image)">remove background</button> -->
-            <p class="error">*No response? Image may be invalid format*</p>
+            <p class="error">No response? Image may be invalid format</p>
             <br>
         </div>
 
@@ -223,6 +222,7 @@ export default {
     padding-top:35px;
     background: rgba(0, 5, 8, 0.6);
     border: rgb(3, 43, 61) 1px solid;
+    border:none;
     border-radius:4px;
     width:789px;
 }
@@ -270,25 +270,22 @@ export default {
   font-size: 13px;
   font-weight: 500;
   outline:none;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgb(114, 116, 117);
   color:white;
   cursor:pointer;
-  border: rgb(2, 20, 29) 1px solid;
-  border-radius:3px;
+  border:none;
+  border-radius:2px;
   margin-bottom:28px;
 }
 .analyze-btn:hover {
-  background: rgba(255, 255, 255, 0.342);
+    background: rgb(122, 124, 125);
 }
 p {
     font-size: 16px;
     margin-bottom:20px;
 }
 .error {
-    font-size:11px;
-    margin-top:-2px;
-    text-shadow: 0px 4px 5px #011e23;
-
+    font-size:12px;
 }
 
 

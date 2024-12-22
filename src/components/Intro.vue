@@ -33,7 +33,7 @@ h1 {
     font-size: 42px;
     margin-top:40px;
     margin-bottom:-25px;
-    text-shadow: 4px 4px 7px #062b36;
+    text-shadow: 4px 4px 7px #062b369c;
     user-select: none;
     letter-spacing:2px;
 }
