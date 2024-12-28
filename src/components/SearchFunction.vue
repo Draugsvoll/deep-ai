@@ -6,7 +6,6 @@
         <input v-model="searchTerm" type="text" placeholder="Search for anything..." autofocus @keyup.enter="search(searchTerm)">
         <button v-scroll-to="'#results'" @click="search(searchTerm)" >Search</button>
       </div>
-     <!-- <h1>Or</h1> -->
 
       <!-- WEBCAM -->
       <div class="webcam" @click="toggleWebcam">
@@ -21,7 +20,6 @@
 
       <!-- IMAGES -->
       <div class="images-container" >
-        <!-- <h3>Select Image</h3> -->
         <p class="error" v-if="!canFetchImages">{{errorMsg}}</p>
         <div class="image" v-for="(image, index) in images" :key=index>
           <!-- single image -->
@@ -90,6 +88,8 @@ export default {
             ref.$store.dispatch('setimages', images)
           } catch (error) {
             console.error(error);
+            this.errorMsg = error
+            this.canFetchImages = false
           }
           this.images = images
       },
@@ -105,6 +105,8 @@ export default {
         this.search(this.searchTerm)
         this.searchTerm=''
         const ref = this
+        const selectedImage = { image: 'https://png.pngtree.com/png-vector/20190820/ourmid/pngtree-no-image-vector-illustration-isolated-png-image_1694547.jpg', index: 0 }
+        ref.$store.dispatch('setcurrentimg', selectedImage)
     },
 }
 </script>
@@ -141,7 +143,7 @@ h3{
   margin:auto;
   margin-top:50px;
   overflow:auto;
-  border: rgb(3, 43, 61) 1px solid;
+  border:none;
   border-radius:4px;
   padding:15px;
   background: rgba(0, 5, 8, 0.6);
@@ -161,8 +163,8 @@ input[type=text] {
   color:rgb(202, 226, 220);
 }
 button {
-  margin:0 5px;
-  width:80px;
+  margin:0 8px;
+  width:90px;
   padding:0.56rem;
   font-size: 14px;
   border-radius:5px;
@@ -171,7 +173,7 @@ button {
   outline:none;
   cursor:pointer;
   border:1px solid var(--border-light);
-  transition: 0.2s;
+  transition: 0.25s;
 }
 button:hover {
     background: rgba(9, 65, 83, 0.99);
@@ -237,7 +239,7 @@ h1 {
     display: flex;
     justify-content: center;
     border-radius: 5px;
-    transition: 0.2s;
+    transition: 0.25s;
 }
 .webcam:hover {
     background-color: rgb(9, 60, 77);

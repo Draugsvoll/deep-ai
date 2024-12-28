@@ -33,15 +33,16 @@ h1 {
     font-size: 42px;
     margin-top:40px;
     margin-bottom:-25px;
-    text-shadow: 4px 4px 7px #062b36;
+    text-shadow: 4px 4px 7px #062b369c;
     user-select: none;
     letter-spacing:2px;
+    font-weight:500;
 }
 h3 {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 500;
     text-shadow: 4px 4px 7px #062b36f1;
-
+    margin-top:18px;
 }
 .sub-headline {
     margin-top: 10px;
@@ -63,6 +64,12 @@ img {
 @media only screen and (max-width: 1000px) {
     h1 {
         font-size: 35px;
+    }
+}
+
+@media only screen and (min-width: 1900px) {
+    h1 {
+        font-size: 50px;
     }
 }
 

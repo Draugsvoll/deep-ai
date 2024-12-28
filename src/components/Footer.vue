@@ -36,7 +36,7 @@ footer{
   color:rgb(213, 229, 233);
   padding:40px;
   margin-top:150px;
-  border-top: rgb(3, 43, 61) 1px solid;
+  border:none;
   font-size: 13px;
   backdrop-filter: blur(2px);
 }
@@ -55,8 +55,8 @@ footer{
     flex-wrap: wrap;
 }
 .footer-headline {
-  font-weight: 600;
-  font-size:16px !important;
+  font-weight: 500;
+  font-size:18px !important;
   margin-bottom: 5px;
 }
 .link {

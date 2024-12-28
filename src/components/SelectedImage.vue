@@ -12,14 +12,13 @@
                 <button class="far fa-chevron-right fa-3x right-btn" @click="nextImage(currentImage)"></button>
             </div>
             <div></div>
-            <p>What do you want from the Ai? </p> 
             <button class="analyze-btn" @click="getCaption(currentImage.image)">Description</button>
             <!-- <button class="analyze-btn" @click="getDemographics(currentImage.image)" >Face Analysis</button> -->
             <button class="analyze-btn" @click="getObjects(currentImage.image)">Find Objects</button>
             <button class="analyze-btn" @click="getEmotions(currentImage.image)">Emotions</button>
-            <button class="analyze-btn" @click="getCelebrity(currentImage.image)">Guess celebrity</button>
+            <button class="analyze-btn" @click="getCelebrity(currentImage.image)">Find celebrity</button>
             <!-- <button class="analyze-btn" @click="removeBackground(currentImage.image)">remove background</button> -->
-            <p class="error">*No response? Image may be invalid format*</p>
+            <p class="error">No response? Image may be invalid format</p>
             <br>
         </div>
 
@@ -223,6 +222,7 @@ export default {
     padding-top:35px;
     background: rgba(0, 5, 8, 0.6);
     border: rgb(3, 43, 61) 1px solid;
+    border:none;
     border-radius:4px;
     width:789px;
 }
@@ -242,6 +242,7 @@ export default {
 }
 .img-row{
     display: flex;
+    justify-self: center;
 }
 .left-btn, .right-btn {
     background: rgba(0,0,0,0);
@@ -252,9 +253,10 @@ export default {
     cursor:pointer;
     color:rgb(243, 252, 245);
     width:125px;
+    transition: all 0.25s;
 }
 .left-btn:hover, .right-btn:hover {
-    color:rgb(121, 152, 160);
+    color:var(--border-light);
 }
 .selected-text {
     margin-top:14px;
@@ -265,30 +267,30 @@ export default {
 }
 .analyze-btn {
   margin:0 5px;
-  height:48px;
-  width:125px;
+  height:50px;
+  width:128px;
   font-size: 13px;
+  letter-spacing: 0.01rem;
   font-weight: 500;
   outline:none;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgb(112 113 114);
   color:white;
   cursor:pointer;
-  border: rgb(2, 20, 29) 1px solid;
-  border-radius:3px;
+  border:none;
+  border-radius:2px;
   margin-bottom:28px;
+  margin-top: 20px;
+  transition: filter 0.25s;
 }
 .analyze-btn:hover {
-  background: rgba(255, 255, 255, 0.342);
+    filter:brightness(1.15);
 }
 p {
     font-size: 16px;
     margin-bottom:20px;
 }
 .error {
-    font-size:11px;
-    margin-top:-2px;
-    text-shadow: 0px 4px 5px #011e23;
-
+    font-size:12px;
 }
 
 
